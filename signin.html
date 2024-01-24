@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <title>Sign In</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<link rel="icon" href="images/Jersey-Sport-logo-700-392.jpg" type="image">
+<link rel="stylesheet" href="css/jerseystore.css" type="text/css">
+<script src="https://kit.fontawesome.com/5297d261f9.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+<header>
+   <a href="home.html" class="logo"><img src="images/Jersey-Sport-logo-700-392.jpg" alt="logo" width="150px"></a>
+
+   <nav>
+      <ul>
+         <li><a href="Home.html">Home</a></li>
+         <li><a href="Basketball.html">Basketball</a></li>
+         <li><a href="Soccer.html">Soccer</a></li>
+         <li><a href="Football.html">Football</a></li>
+         <li><a href="Baseball.html">Baseball</a></li>
+         <li><a href="Contact us.html">Contact</a></li>
+         <li><a href="About us"> About </a></li>
+         <li><a href="signup.html">Sign up</a></li>
+         
+      
+      
+      </ul>
+      </nav>
+</header>
+
+
+<div class="login">
+
+  <form id="form" action="Home.html"    method="Post">
+  <h1>Login</h1>
+
+  <div class="form-control">
+   <label for="user">username</label>
+   <input type="text" id="user" placeholder="Username" name="username">
+   <i class="fas fa-check-circle .valid"></i>
+   <i class="fas fa-exclamation-circle .invalid"></i>
+   <p>Error Message</p>
+      </div>
+   
+   <div class="form-control">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="password" name="pssword">
+      <i class="fas fa-check-circle .valid"></i>
+      <i class="fas fa-exclamation-circle .invalid"></i>
+      <p>Error Message</p>
+      </div>
+
+          <p class="register">Not have an account?<a href="signup.html"><span>Sign Up</span></a></p>
+		  <a href="Home.html"><input type="submit"  class="btn" value="Submit" id="submit"></a>
+		  
+		 </form>
+		 </div>
+		 
+       <script>
+         var form=document.querySelector('#form');
+        var user=document.querySelector('#user');
+        var password=document.querySelector('#password');
+
+        form.addEventListener('click',(e)=>{
+         checkInputs();
+         if (isformValid()==true){
+            form.submit();
+         }else{
+            e.preventDefault();
+         }
+          });
+
+
+
+          function isformValid(){
+				const inputContainers=form.querySelectorAll('.form-control');
+				let result=true;
+				inputContainers.forEach((container)=>{
+					if(container.classList.contains('setError')){
+						result=false;
+					}
+				});
+				return result;
+			}
+
+          function checkInputs(){
+           // username validation
+           if(user.value.trim()=='' ){
+            setError(user,'Username must be at least 6 characters');
+
+           }else if(user.value.trim().length<6){
+            setError(user,'Username must be at least 6 characters');
+           }
+           else{
+            setSuccess(user);
+           }
+           
+          // password validation
+          if(password.value.trim()=='' ){
+            setError(password,'Password must be at least 6 characters');
+          }else if(password.value.trim().length<6){
+            setError(password,'Password must be at least 6 characters');
+          }
+          else{
+            setSuccess(password);
+          }
+         }
+
+
+
+
+          function setError(element,msg){
+				element.style.border='3px solid red';
+            const parent=element.parentElement;
+            const p=parent.querySelector('p');
+            p.textContent=msg;
+            p.style.visibility='visible';
+				
+			}
+
+         function setSuccess(element){
+            element.style.border='3px solid green';
+            const parent=element.parentElement;
+            const p=parent.querySelector('p');
+            p.style.visibility='hidden';
+            
+         }
+         </script>
+     
+       <footer class="footer">
+        <div class="inner-footer">
+         <div class="social-links">
+            <ul>
+               <li class="social-items"><a href="#"><i class="fab fa-facebook"></i></a></li>
+               <li class="social-items"><a href="#"><i class="fab fa-twitter"></i></a></li>
+               <li class="social-items"><a href="#"><i class="fab fa-instagram"></i></a></li>
+               <li class="social-items"><a href="#"><i class="fab fa-snapchat"></i></a></li>
+    
+              </ul>
+            </div>
+         <div class="quick-links">
+            <ul>
+           <li class="quick-items"><a href="#">Home</a></li>
+           <li class="quick-items"><a href="#">Conact Us</a></li>
+           <li class="quick-items"><a href="#">About Us</a></li>
+            </ul>
+           </div>
+        </div>  
+          <div class="outer-footer">
+          Copyright 2021 &copy; Online Jersey Store.All Rights Reserved 
+    
+          </div>
+      
+       </footer>
+    
+         
+</body>
+
+</html>

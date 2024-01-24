@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <title>Sign Up</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<link rel="icon" href="images/Jersey-Sport-logo-700-392.jpg" type="image">
+<link rel="stylesheet" href="css/jerseystore.css" type="text/css">
+<script src="https://kit.fontawesome.com/5297d261f9.js" crossorigin="anonymous"></script>
+
+	
+</head>
+
+<body>
+	<header>
+		<a href="home.html" class="logo"><img src="images/Jersey-Sport-logo-700-392.jpg" alt="logo" width="150px">
+
+
+	<nav>
+		<ul>
+		   <li><a href="Home.html">Home</a></li>
+		   <li><a href="Basketball.html">Basketball</a></li>
+		   <li><a href="Soccer.html">Soccer</a></li>
+		   <li><a href="Football.html">Football</a></li>
+		   <li><a href="Baseball.html">Baseball</a></li>
+		   <li><a href="Contact us.html">Contact</a></li>
+		   <li><a href="About us.html"> About</a></li>
+		   <li><a href="SignIn.html">SignIn</a></li>
+		   
+		
+		
+		</ul>
+		</nav>
+	</header>
+
+
+</div>
+<div class="signup">
+
+      
+	  <form id="form" action="Home.html" method="GET"  >
+		  <div class='title'>
+		   <h2>Create Account</h2>
+		  </div>
+		
+		  <div class="form-control">
+           <label for="username">Name</label>
+		   <input type="text" id="username" placeholder="Name" name="username" >
+		   <i class="fas fa-check-circle"></i>
+		   <i class="fas fa-exclamation-circle"></i>
+		   <p>Error Message</p>
+
+		  </div>
+	  
+		  <div class="form-control">
+			<label for="email">Email</label>
+			<input type="email" id="email" placeholder="email" name="email">
+			<i class="fas fa-check-circle"></i>
+			<i class="fas fa-exclamation-circle"></i>
+			<p>Error Message</p>
+            </div>
+	      
+			<div class="form-control">
+				<label for="passpord">Password</label>
+				<input type="password" id="password" placeholder="password" name="pssword">
+				<i class="fas fa-check-circle"></i>
+				<i class="fas fa-exclamation-circle"></i>
+				<p>Error Message</p>
+			   </div>
+		
+
+			   <div class="form-control">
+				<label for="confirm-conirm">confirm password</label>
+				<input type="password" id="confirm-password" placeholder="confirm-password" name="confirm-password">
+				<i class="fas fa-check-circle"></i>
+				<i class="fas fa-exclamation-circle"></i>
+				<p>Error Message</p>
+	 
+			   </div>  
+             
+			   <div class="form-control">
+				<label for="phone">Phone</label>
+				<input type="phone" id="phone" placeholder="phone" name="phone">
+				<i class="fas fa-check-circle"></i>
+				<i class="fas fa-exclamation-circle"></i>
+				<p>Error Message</p>
+	 
+			   </div>  
+			   <p class="register">Already have an account<a href="signin.html"><span>Sign In</span></a></p>
+		      <button type="submit"class="btn" >Submit</button>
+			
+		 </form>
+		 
+		
+
+
+		 <script>
+			const form=document.querySelector('#form');
+			const usernameInput=document.querySelector('#username');
+			const emailInput=document.querySelector('#email');
+			const passwordInput=document.querySelector('#password');
+			const password2Input=document.querySelector('#confirm-password');
+			const numberInput=document.querySelector('#phone');
+			
+	   
+			form.addEventListener('submit',(e)=>{
+			  checkInputs();
+			  if (isformValid()==true){
+				  form.submit();
+			  }else{
+				e.preventDefault();
+			  }
+				 
+			});
+            function isformValid(){
+				const inputContainers=form.querySelectorAll('.form-control');
+				let result=true;
+				inputContainers.forEach((container)=>{
+					if(container.classList.contains('error')){
+						result=false;
+					}
+				});
+				return result;
+			}
+
+			function checkInputs(){
+				//username
+				if(usernameInput.value.trim()==''){
+					setError(usernameInput,'username can not be empty');
+				}
+				else if(usernameInput.value.trim().length<3){
+					setError(usernameInput,'minimum 3 letters are required');
+				}
+				 else{
+					setSuccess(usernameInput);
+				}
+				//EMAIL
+				if(emailInput.value.trim()==''){
+					setError(emailInput,'provide email');
+				}
+				else if(isEmailValid(emailInput.value)){
+                  setSuccess(emailInput);
+				}
+				else{
+					setError(emailInput,'provide valid email');
+				}
+
+                  //PASSWORD
+				if(passwordInput.value.trim()==''){
+			   setError(passwordInput,'password can not be empty');
+				}
+			   else if(passwordInput.value.trim().length<8 ||passwordInput.value.trim().length>16)
+				{
+					setError(passwordInput,'password should be 8-16 characters');
+				}
+             else{
+				 setSuccess(passwordInput);
+			 }
+		    
+			 if(password2Input.value.trim()==''){
+				setError(password2Input,'password can not be empty');
+			}
+			else if(password2Input.value.trim()!=passwordInput.value.trim()){
+				setError(password2Input,'password does not match');
+			}
+			else{
+				setSuccess(password2Input);
+			}
+			//PHONE NUMBER
+			if(numberInput.value.trim()==''){
+				setError(numberInput,'phone number can not be empty');
+			}
+			else if(numberInput.value.trim().length<8||numberInput.value.trim().length>12){
+				setError(numberInput,'invalid number');
+			}
+              else if(validnumber(numberInput.value)){
+               setSuccess(numberInput);
+			  }
+			  else{
+				  setError(numberInput,'error');
+			  }
+			}
+			
+           
+			
+
+			
+
+	        function setSuccess(element){
+				const parent =element.parentElement;
+				if(parent.classList.contains('error')){
+					parent.classList.remove('error');
+				}
+				parent.classList.add('success');
+
+			}
+			function setError(element,errorMessage){
+				const parent =element.parentElement;
+				if(parent.classList.contains('success')){
+				parent.classList.remove('success');
+				}
+				parent.classList.add('error');
+				
+				const paragraph=parent.querySelector('p');
+				paragraph.textContent=errorMessage;
+			}
+
+			function validnumber(number){
+				const num=/^[0-9]{1,12}$/
+				return num.test(number);
+			}
+
+			function isEmailValid(email){
+                const reg=/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+				return reg.test(email);
+			}
+	         
+			 </script>
+		 
+</div>
+<footer class="footer">
+	<div class="inner-footer">
+	 <div class="social-links">
+		<ul>
+		   <li class="social-items"><a href="#"><i class="fab fa-facebook"></i></a></li>
+		   <li class="social-items"><a href="#"><i class="fab fa-twitter"></i></a></li>
+		   <li class="social-items"><a href="#"><i class="fab fa-instagram"></i></a></li>
+		   <li class="social-items"><a href="#"><i class="fab fa-snapchat"></i></a></li>
+
+		  </ul>
+		</div>
+	 <div class="quick-links">
+		<ul>
+	   <li class="quick-items"><a href="#">Home</a></li>
+	   <li class="quick-items"><a href="#">Conact Us</a></li>
+	   <li class="quick-items"><a href="#">About Us</a></li>
+		</ul>
+	   </div>
+	</div>  
+	  <div class="outer-footer">
+	  Copyright 2021 &copy; Online Jersey Store.All Rights Reserved 
+
+	  </div>
+  
+   </footer>
+
+</body>
+</html>
